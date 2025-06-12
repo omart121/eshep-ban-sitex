@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ban List - Eshep</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #1e1e1e; color: #f1f1f1; padding: 20px; }
+        h1 { color: #f44336; }
+        .ban-entry { background: #333; padding: 10px; margin-bottom: 10px; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <h1>🚫 Ban List - Eshep</h1>
+    <div id="banList"></div>
+
+    <script>
+        fetch('bans.json')
+            .then(response => response.json())
+            .then(data => {
+                const list = document.getElementById('banList');
+                data.forEach(ban => {
+                    const entry = document.createElement('div');
+                    entry.className = 'ban-entry';
+                    entry.innerHTML = `<strong>${ban.player}</strong> was banned for <em>${ban.reason}</em> - <small>${ban.date}</small>`;
+                    list.appendChild(entry);
+                });
+            });
+    </script>
+</body>
+</html>
